@@ -252,6 +252,9 @@ INNER JOIN movies ON studios.id = movies.studio_id;
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT movies.title, actors.name, cast.characters FROM cast 
-INNER JOIN movies ON movies.id = cast.movie_id 
-INNER JOIN actors ON actors.id = cast.actor_id;
+-- SELECT characters from cast;
+-- SELECT title from movies;
+-- select name from actors;
+-- SELECT movies.title, actors.name, cast.characters FROM cast 
+-- INNER JOIN movies ON movies.id = cast.movie_id 
+-- INNER JOIN actors ON actors.id = cast.actor_id;
