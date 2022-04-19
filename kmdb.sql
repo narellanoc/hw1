@@ -105,20 +105,22 @@
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS actors;
-DROP TABLE IF EXISTS acted;
+DROP TABLE IF EXISTS characters;
+DROP TABLE IF EXISTS cast;
 
 -- Create new tables, according to your domain model
 -- TODO!
 
 CREATE TABLE studios(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    studio_name TEXT
+    name TEXT
 );
 
 CREATE TABLE movies(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
-    MPAA_Rating INTEGER,
+    year INTEGER,
+    mpaa_rating INTEGER,
     studio_id
 );
 
@@ -127,16 +129,62 @@ CREATE TABLE actors(
     name TEXT
 );
 
-CREATE TABLE Acted(
+CREATE TABLE characters(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
+
+CREATE TABLE cast(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_id INTEGER,
     actor_id INTEGER,
-    character TEXT
+    character_id INTEGER
 );
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+
+INSERT INTO studios 
+    (name)
+VALUES 
+    ("Warner Bros.");
+
+INSERT INTO movies 
+    (title, year, mpaa_rating, studio_id)
+VALUES 
+    ("Batman Begins",2005,"PG-13",1),
+    ("The Dark Knight",2008,"PG-13",1),
+    ("The Dark Knight Rises",2012,"PG-13",1);
+
+INSERT INTO actors
+    (name)
+VALUES
+    ("Christian Bale"),
+    ("Michael Caine"),
+    ("Liam Neeson"),
+    ("Katie Holmes"),
+    ("Gary Oldman"),
+    ("Heath Ledger"),
+    ("Aaron Eckhart"),
+    ("Maggie Gyllenhaal"),
+    ("Tom Hardy"),
+    ("Joseph Gordon-Levitt"),
+    ("Anne Hathaway");
+
+INSERT INTO characters
+    (name)
+VALUES
+    ("Bruce Wayne"),
+    ("Alfred"),
+    ("Ra's Al Ghul"),
+    ("Rachel Dawes"),
+    ("Commissioner Gordon"),
+    ("Joker"),
+    ("Harvey Dent"),
+    ("Bane"),
+    ("John Blake"),
+    ("Selina Kyle");
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -146,12 +194,15 @@ CREATE TABLE Acted(
 -- The SQL statement for the movies output
 -- TODO!
 
+SELECT movies.title,movies.year,movies.mpaa_rating,studios.name
+FROM studios INNER JOIN movies ON studios.id = movies.studio_id;
+
 -- Prints a header for the cast output
 .print ""
 .print "Top Cast"
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
 -- TODO!
+
